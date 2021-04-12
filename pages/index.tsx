@@ -32,21 +32,24 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
           Sync DB app 
         </h1>
 
-        <p className={styles.description}>
-        Service example to sync the database with data from a third party API
-        </p>
+        
+          <p className={styles.description}>
+          Service example to sync the database with data from a third party API
+          </p>
 
-        <p style ={{ textAlign: 'center', width: '80%'}}>
-          Imaging you have an app which creates data in your database base on a third party API (this doesn’t mean that you replicate the data from the third party in your database, is more like if something changes in the third party app, then you create something in your DB base on that). This means that when the data changes in the third party, probably you will need to delete or create data in your database (model).
-        </p>
+          <p style ={{ textAlign: 'center', width: '80%'}}>
+            Imaging you have an app which creates data in your database base on a third party API (this doesn’t mean that you replicate the data from the third party in your database, is more like if something changes in the third party app, then you create something in your DB base on that). This means that when the data changes in the third party, probably you will need to delete or create data in your database (model).
+          </p>
 
-        <p className={styles.description}>
-          Here we see the list that we have internally saved (in our database) and the results from sync service
-        </p>
+          <p className={styles.description}>
+            Here we see the list that we have internally saved (in our database) and the results from sync service
+          </p>
+        
 
         <div className={pokeStyles.pokemonContainer}>
           <div className={pokeStyles.pokeColumn}>
             <div className={pokeStyles.pokeList} style={{ overflowX: 'auto'}}>
+              <span style={{ marginBottom: '16px'}}>Database mock list:</span>
               {pokemons.map(pokemon => (
                 <div className={pokeStyles.pokeElement} key={pokemon.id}>
                   <span>{pokemon.externalId}-{pokemon.name}</span>
