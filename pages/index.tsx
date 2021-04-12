@@ -48,6 +48,15 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
 
         <div className={pokeStyles.pokemonContainer}>
           <div className={pokeStyles.pokeColumn}>
+
+            <div className={pokeStyles.pokeFormContainer}>
+              <input type="number" value={untilPokeID} onChange={e => {
+                setUntilPokeID(parseInt(e.target.value))
+              }} style={{ marginBottom: '16px', marginRight: '16px'}} />
+              <button style={{ marginBottom: '16px'}} onClick={handleSync}>Sync</button>
+            </div>
+
+
             <div className={pokeStyles.pokeList} style={{ overflowX: 'auto'}}>
               <span style={{ marginBottom: '16px'}}>Database mock list:</span>
               {pokemons.map(pokemon => (
@@ -56,10 +65,7 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
                 </div>
               ))}
             </div>
-            <input type="number" value={untilPokeID} onChange={e => {
-              setUntilPokeID(parseInt(e.target.value))
-            }} style={{ marginBottom: '16px'}} />
-            <button onClick={handleSync}>Sync</button>
+            
           </div>
 
           <div className={pokeStyles.syncResultsContainer}>
@@ -71,7 +77,7 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
                     <span>name - {result.name}</span>
                   </div>
                 )): (
-                  <span>nothing</span>
+                  <span>nothing changed</span>
                 )}
               </div>
             </div>
@@ -84,7 +90,7 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
                     <span>name - {result.name}</span>
                   </div>
                 )): (
-                  <span>nothing</span>
+                  <span>nothing changed</span>
                 )}
               </div>
             </div>

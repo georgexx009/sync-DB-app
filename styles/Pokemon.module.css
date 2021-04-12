@@ -3,13 +3,13 @@
 	grid-template-columns: 1fr 1fr;
 	padding-top: 32px;
 
-	width: 70%;
+	width: 80%;
 }
 
 .pokeColumn {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	align-items: center;
 }
 
 .pokeList {
@@ -20,6 +20,11 @@
 	margin-bottom: 32px;
 	
 	max-width: 750px;
+}
+
+.pokeFormContainer { 
+	width: 50%;
+	display: flex;
 }
 
 .pokeElement {
@@ -37,7 +42,6 @@
 .pokeColumnResult {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 }
 
 .pokeResults {
