@@ -1,0 +1,51 @@
+.pokemonContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding-top: 32px;
+
+	width: 70%;
+}
+
+.pokeColumn {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.pokeList {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-bottom: 32px;
+	max-height: 200px;
+	max-width: 750px;
+}
+
+.pokeElement {
+	margin-right: 8px;
+	margin-bottom: 4px;
+}
+
+.syncResultsContainer {
+	display: flex;
+	padding: 0 2rem;
+	width: 80%;
+	overflow-y: auto;
+}
+
+.pokeColumnResult {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: auto;
+}
+
+.pokeResults {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-bottom: 32px;
+	max-height: 200px;
+	width: 100%;
+}
