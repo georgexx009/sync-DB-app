@@ -2,6 +2,8 @@ import { useState } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { InternalData, ApiResponse } from '../types';
+import { fetchPokemons as fetchPokemonsUtil } from '../utils/fetchPokemons'
+import { mapExternalToInternal } from '../utils/mapPokemonData';
 
 const fetchPokemons = async ({ untilID = 5 }: { untilID?: number } = {}) => {
   const pokemonList: ApiResponse = await (await fetch('http://localhost:3000/api/pokemons/' + untilID)).json();
@@ -113,7 +115,12 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
 
 export async function getStaticProps() {
   // mocking saved data in our DB
-  const { pokemonList } = await fetchPokemons();
+  const pokemonsExternal = await fetchPokemonsUtil();
+
+  const pokemonList = pokemonsExternal.map((pokemon, i) => {
+    const mappedPokemon = mapExternalToInternal({ externalData: pokemon, id: i });
+    return mappedPokemon;
+  });
 
   return {
     props: {
