@@ -5,8 +5,10 @@ import { InternalData, ApiResponse } from '../types';
 import { fetchPokemons as fetchPokemonsUtil } from '../utils/fetchPokemons'
 import { mapExternalToInternal } from '../utils/mapPokemonData';
 
+const server = process.env.SERVER || 'http://localhost:3000'
+
 const fetchPokemons = async ({ untilID = 5 }: { untilID?: number } = {}) => {
-  const pokemonList: ApiResponse = await (await fetch('http://localhost:3000/api/pokemons/' + untilID)).json();
+  const pokemonList: ApiResponse = await (await fetch(`${server}/api/pokemons/${untilID}`)).json();
   return pokemonList;
 }
 
@@ -51,7 +53,7 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
         <div className={styles.serviceExampleContainer}>
           <div className={styles.pokemonList}>
 
-            <div>
+            <div className={styles.pokeListForm}>
               <input type="number" value={untilPokeID} onChange={e => {
                 setUntilPokeID(parseInt(e.target.value))
               }} style={{ marginBottom: '16px', marginRight: '16px'}} />

@@ -14,6 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+	margin-top: 1rem;
 }
 
 .main {
@@ -35,6 +37,8 @@
 	width: 60%;
 	margin: 0 auto;
 }
+
+
 
 .pokemonList {
 	width: 50%;
@@ -88,6 +92,28 @@
 
 .main button:hover {
 	opacity: 0.85;
+}
+
+@media only screen and (max-width: 600px) {
+	.main {
+		width: 95%;
+	}
+
+	.serviceExampleContainer {
+		flex-direction: column;
+	}
+
+	.pokemonList {
+		width: 90%;
+	}
+
+	.pokeListForm {
+		margin: 0 auto;
+	}
+
+	.serviceExampleContainer {
+		width: 90%;
+	}
 }
 
 
