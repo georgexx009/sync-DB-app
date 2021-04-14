@@ -66,7 +66,7 @@ export default function Home() {
                 <div className={styles.pokeElement} key={pokemon.id}>
                   <span>{pokemon.externalId}-{pokemon.name}</span>
                 </div>
-              )) : <span>Start by clicking button</span>}
+              )) : <span>Start by clicking the button</span>}
             </div>
             
           </div>
