@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { InternalData, ApiResponse } from '../types';
-import { fetchPokemons as fetchPokemonsUtil } from '../utils/fetchPokemons'
-import { mapExternalToInternal } from '../utils/mapPokemonData';
+import { ApiResponse } from '../types';
 
 const server = process.env.SERVER || 'http://localhost:3000'
 
@@ -12,9 +10,9 @@ const fetchPokemons = async ({ untilID = 5 }: { untilID?: number } = {}) => {
   return pokemonList;
 }
 
-export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
+export default function Home() {
   const [untilPokeID, setUntilPokeID] = useState(5);
-  const [pokemons, setPokemons] = useState(pokemonList);
+  const [pokemons, setPokemons] = useState([]);
   const [syncResults, setSyncResults] = useState<ApiResponse['syncResults']>(null);
 
   const handleSync = async () => {
@@ -57,16 +55,18 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
               <input type="number" value={untilPokeID} onChange={e => {
                 setUntilPokeID(parseInt(e.target.value))
               }} style={{ marginBottom: '16px', marginRight: '16px'}} />
-              <button style={{ marginBottom: '16px'}} onClick={handleSync}>Sync</button>
+              <button style={{ marginBottom: '16px'}} onClick={handleSync}>
+                {pokemons.length > 0 ? 'Sync' : 'Start'}
+              </button>
             </div>
 
             <div style={{ overflowY: 'auto' }}>
               <h4>Database mock list:</h4>
-              {pokemons.map(pokemon => (
+              {pokemons.length > 0 ? pokemons.map(pokemon => (
                 <div className={styles.pokeElement} key={pokemon.id}>
                   <span>{pokemon.externalId}-{pokemon.name}</span>
                 </div>
-              ))}
+              )) : <span>Start by clicking button</span>}
             </div>
             
           </div>
@@ -113,20 +113,4 @@ export default function Home({ pokemonList }: { pokemonList: InternalData[] }) {
       </footer>
     </div>
   )
-}
-
-export async function getStaticProps() {
-  // mocking saved data in our DB
-  const pokemonsExternal = await fetchPokemonsUtil();
-
-  const pokemonList = pokemonsExternal.map((pokemon, i) => {
-    const mappedPokemon = mapExternalToInternal({ externalData: pokemon, id: i });
-    return mappedPokemon;
-  });
-
-  return {
-    props: {
-      pokemonList
-    }
-  }
 }

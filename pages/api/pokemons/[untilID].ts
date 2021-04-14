@@ -1,9 +1,5 @@
-import { InternalData } from './../../../types/index';
-import { mapExternalToInternal } from "../../../utils/mapPokemonData";
-import { fetchPokemons } from "../../../utils/fetchPokemons";
+import { fetchPokemons, mapExternalToInternal, updatePokemonsDB, getPokemonsDB } from '../../../utils';
 import { syncDb } from '../../../services/sync-db'
-
-let pokemonsDB: InternalData[] = [];
 
 export default async (req, res) => {
 	const pokemonsExternal = await fetchPokemons({ untilID: parseInt(req.query.untilID) })
@@ -13,11 +9,13 @@ export default async (req, res) => {
     return mappedPokemon;
   });
 
+	const pokemonsDB = getPokemonsDB();
+
 	const internalPokemons = pokemonsDB.length === 0 ? pokemonList : pokemonsDB;
 	const syncResults = await syncDb({ internalData: internalPokemons, externalData: pokemonsExternal });
 
 	// simulates DB, but its just a global var saving data in the heap
-	pokemonsDB = pokemonList;
+	updatePokemonsDB({ pokemonList });
 
 	res.send({
 		syncResults,

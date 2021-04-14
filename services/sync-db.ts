@@ -14,6 +14,7 @@ interface SyncDbParams {
 }
 
 export const syncDb = async ({ internalData, externalData }: SyncDbParams) => {
+	console.log(internalData);
   let deleteResults: ResultOperation[] = []
   let createResults: ResultOperation[] = []
 
